@@ -1,6 +1,6 @@
-let d;
+let d
 let b;
-
+let p;
 function setup() {
     createCanvas(640, 640);
     background(0);
@@ -73,6 +73,33 @@ class Brain {
         {
             let randomAngle = random(2*PI);
             this.directions[this.i] = p5.Vector.fromAngle(randomAngle);
+        }
+    }
+};
+
+//-------------------------------------------------------------------------------
+
+class Population {
+    constructor(size){
+        this.d = new Array();
+        this.size = size;
+        for(this.i=0;this.i<this.size;this.i++)
+        {
+            this.d[this.i] = new dot();
+        }
+    }
+
+    show(){
+        for(this.i=0;this.i<this.size;this.i++)
+        {
+            this.d[this.i].show;
+        }
+    }
+
+    update(){
+        for(this.i=0;this.i<this.size;this.i++)
+        {
+            this.d[this.i].update;
         }
     }
 };
