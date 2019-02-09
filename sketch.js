@@ -1,28 +1,25 @@
-let d
-let b;
 let p;
 function setup() {
     createCanvas(640, 640);
     background(0);
-    d = new dot();
+    p = new Population(100);
 }
 
 function draw(){
-    fill(0,0,255);
-    d.update();
-    clear();
     background(0);
-    d.show();
+    p.update();
+    p.show();
 }
 
 //-----------------------------------------------------------------------------------------------------
 class dot {
-    constructor(){
+    constructor(size){
         this.pos = createVector(width/2,height/2);
         this.vel = createVector(0,0);
         this.acc = createVector(0,0);
         this.dead = false;
-        b = new Brain(400);
+        this.size = size;
+        this.b = new Brain(this.size);
     }
 
     show() {
@@ -31,10 +28,10 @@ class dot {
     }
 
     move() {
-        if(400>b.step)
+        if(this.size>this.b.step)
         {
-            this.acc = b.directions[b.step];
-            b.step++;
+            this.acc = this.b.directions[this.b.step];
+            this.b.step++;
         }
         else {
             this.dead = true;
@@ -49,11 +46,12 @@ class dot {
         if(!this.dead)
         {
             this.move();
-            if(this.pos.x<3 || this.pos.y<3 || this.pos.x > width - 3 || this.pos.y > height-3)
+            if(this.pos.x<4 || this.pos.y<4 || this.pos.x > width - 4 || this.pos.y > height-4)
             {
-                this.dead = true;
+                this.dead = true; 
             }
         }
+        return this.dead;
     }
 }
 
@@ -81,25 +79,25 @@ class Brain {
 
 class Population {
     constructor(size){
-        this.d = new Array();
+        this.d = new dot();
         this.size = size;
-        for(this.i=0;this.i<this.size;this.i++)
+        for(this.i=0;this.i<size;this.i++)
         {
-            this.d[this.i] = new dot();
+            this.d[this.i] = new dot(400);
         }
     }
 
     show(){
         for(this.i=0;this.i<this.size;this.i++)
         {
-            this.d[this.i].show;
+            this.d[this.i].show();
         }
     }
 
     update(){
         for(this.i=0;this.i<this.size;this.i++)
         {
-            this.d[this.i].update;
+            this.d[this.i].update();
         }
     }
 };
