@@ -86,6 +86,7 @@ class dot {
     getFitness(){
         this.distance = dist(this.pos.x,this.pos.y,goal.x,goal.y);
         this.fitness = 1/this.distance;
+        return this.fitness;
     }
 
     //Dot reproduces for next generation
