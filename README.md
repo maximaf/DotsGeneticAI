@@ -1,6 +1,11 @@
 # What is a Genetic Algorithm?
 A genetic algorithm in simple terms in a model where generation after generation learns and adapts from their parents due to a "natural selection-like effect" where the strong are more likely to survive and reproduce.
-# How to Run the JS File
-For the javascript simulation to work correctly, you must reference p5.js in your html file like I have done in index.html. You can downloaded p5.js from https://p5js.org/download/.
-# Current Problems
-My lack of experience in Javascript has resulted in many scope related problems that I'm currently fixing. As a result, the current simulation only demonstrates the first generation, which has no parent to learn from and makes random movements.
+* The best dot is preserved with identical behavior to next generation
+* The other children are randomly mutated with 1% rate
+# Data Structures
+* `Population` class manages dots and breeds new generations
+* `dot` class represents single unit
+* `Brain` class provides movement behavior of unit
+# UI processing
+Visualization made by p5.js, a very cool UI processing library.
+See: https://p5js.org/
