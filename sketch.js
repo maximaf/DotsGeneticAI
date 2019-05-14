@@ -1,5 +1,6 @@
 let p;
 let goal;
+let obstacles;
 
 //Standard p5.js starts with a setup, where "preprocessing" begins
 function setup() {
@@ -10,6 +11,8 @@ function setup() {
     p = new Population(1000);
     //The goal to "win" the game is for the points to hit the circle as the goal vector
     goal = createVector(400,100);
+
+    obstacles = [[150, 200, 300, 10], [350, 400, 400, 10], [100, 600, 400, 10]];
 }
 
 //Standard p5.js starts with a draw function which loops every frame
@@ -22,8 +25,12 @@ function draw(){
     else 
     {
         background(0);
+
         fill(255,255,0);
         ellipse(goal.x,goal.y,10,10);
+
+        fill(128, 128, 128);
+        obstacles.forEach(obs => rect(obs[0], obs[1], obs[2], obs[3]));
 
         //updates the position of every dot and shows it on the canvas
         p.update();
@@ -80,11 +87,17 @@ class dot {
             this.move();
             if(this.pos.x<4 || this.pos.y<4 || this.pos.x > width - 4 || this.pos.y > height-4)
             {
-                this.dead = true; 
+                this.dead = true;
             }
             else if (dist(this.pos.x,this.pos.y,goal.x,goal.y)<7)
             {
                 this.success = true;
+            }
+            else {
+                obstacles.forEach(obs => {
+                    let hit = collidePointRect(this.pos.x, this.pos.y, obs[0], obs[1], obs[2], obs[3]);
+                    if (hit) this.dead = true;
+                });
             }
         }
     }
